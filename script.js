@@ -40,6 +40,22 @@ $('.btn').on('click', function () {
         .then(function (data) {
           console.log(data);
           $('#uvi').text("UV Index: " + data.current.uvi)
+          var uvindex = data.current.uvi;
+
+          //check condition
+          if (uvindex < 2) {
+            $('#uvi').css("background-color","green")
+            $('#uvi').css("color","white")
+          }else if(uvindex>=2 && unindex<5){
+            $('#uvi').css("background-color","yellow")
+            $('#uvi').css("color","white")
+          }else if(uvindex>=5 && unindex<8){
+            $('#uvi').css("background-color","orange")
+            $('#uvi').css("color","white")
+          }else{
+            $('#uvi').css("background-color","red")
+            $('#uvi').css("color","white")
+          }
 
         })
 
