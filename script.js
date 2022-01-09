@@ -26,14 +26,14 @@ $('.btn').on('click', function () {
       //display weather
       var currentDate = moment().format("(M/DD/YYYY)");
       var weatherIcon = $('<img>');
-      weatherIcon.attr("src",'http://openweathermap.org/img/wn/'+ data.weather[0].icon + '@2x.png')
+      weatherIcon.attr("src", 'http://openweathermap.org/img/wn/' + data.weather[0].icon + '@2x.png')
 
 
-      $('#city').text(data.name + " " + currentDate );
+      $('#city').text(data.name + " " + currentDate);
       $('#city').append(weatherIcon)
-      
+
       $('#weatherCondition').text("Weather: " + data.weather[0].description)
-      $('#temp').text("Temperature: " + data.main.temp + " F")
+      $('#temp').text("Temperature: " + data.main.temp + " °F")
       $('#humidity').text("Humidity: " + data.main.humidity + "%")
       $('#windspeed').text("Wind Speed: " + data.wind.speed + " MPH")
 
@@ -71,6 +71,41 @@ $('.btn').on('click', function () {
 
           //store data in an object then json.stringify to store into local array?
           //have key be city name
+        })
+      var forecastHeader = $('<h3>').text("5 Day Forecast:")
+      $('#5day').append(forecastHeader);
+      forecastHeader.addClass("col-md-12")
+      var forecastURL = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&units=imperial&appid=e6a41f6fdcb53d621e32978ad90ef82f'
+      console.log(forecastURL)
+      fetch(forecastURL)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          console.log("forecast", data);
+          for (let i = 2; i < data.list.length; i += 8) {
+            //Date, Icon, temp, Humidity
+            let weatherikon = $('<img>');
+            weatherikon.attr("src", 'http://openweathermap.org/img/wn/' + data.list[i].weather[0].icon + '@2x.png')
+            var card = $('<div>');
+            card.addClass("card");
+            var cardbody = $('<div>');
+            cardbody.addClass("card-body");
+
+            $('#5day').append(card);
+            card.append(cardbody);
+
+            let tomorrow = moment().add((i - 1) / 8, 'days').format("M/DD/YYYY");
+            cardbody.append($('<h4>').text(tomorrow));
+            cardbody.append(weatherikon);
+            cardbody.append($('<p>').text("Temperature: " + data.list[i].main.temp + " °F"));
+            cardbody.append($('<p>').text("Humidity: " + data.list[i].main.humidity + "%"));
+            cardbody.append($('<p>').text("Windspeed: " + data.list[i].wind.speed + " MPH"));
+
+
+
+
+          }
         })
 
     })
