@@ -9,19 +9,30 @@ $('.btn').on('click', function () {
 
   console.log(city);
   console.log(requestUrl)
+  var cityButton = $('<button type="button">');
+  cityButton.text(city);
+  cityButton.addClass("btn btn-primary")
+
+  $('.citySearch').append(cityButton);
 
 
   //fetch weather
   fetch(requestUrl)
     .then(function (response) {
-      return response.json();
+      return response.json()
     })
     .then(function (data) {
       console.log(data);
       //display weather
       var currentDate = moment().format("(M/DD/YYYY)");
+      var weatherIcon = $('<img>');
+      weatherIcon.attr("src",'http://openweathermap.org/img/wn/'+ data.weather[0].icon + '@2x.png')
 
-      $('#city').text(data.name + " " + currentDate);
+
+      $('#city').text(data.name + " " + currentDate );
+      $('#city').append(weatherIcon)
+      
+      $('#weatherCondition').text("Weather: " + data.weather[0].description)
       $('#temp').text("Temperature: " + data.main.temp + " F")
       $('#humidity').text("Humidity: " + data.main.humidity + "%")
       $('#windspeed').text("Wind Speed: " + data.wind.speed + " MPH")
@@ -44,19 +55,22 @@ $('.btn').on('click', function () {
 
           //check condition
           if (uvindex < 2) {
-            $('#uvi').css("background-color","green")
-            $('#uvi').css("color","white")
-          }else if(uvindex>=2 && unindex<5){
-            $('#uvi').css("background-color","yellow")
-            $('#uvi').css("color","white")
-          }else if(uvindex>=5 && unindex<8){
-            $('#uvi').css("background-color","orange")
-            $('#uvi').css("color","white")
-          }else{
-            $('#uvi').css("background-color","red")
-            $('#uvi').css("color","white")
+            $('#uvi').css("background-color", "green")
+            $('#uvi').css("color", "white")
+          } else if (uvindex >= 2 && unindex < 5) {
+            $('#uvi').css("background-color", "yellow")
+            $('#uvi').css("color", "white")
+          } else if (uvindex >= 5 && unindex < 8) {
+            $('#uvi').css("background-color", "orange")
+            $('#uvi').css("color", "white")
+          } else {
+            $('#uvi').css("background-color", "red")
+            $('#uvi').css("color", "white")
           }
 
+
+          //store data in an object then json.stringify to store into local array?
+          //have key be city name
         })
 
     })
