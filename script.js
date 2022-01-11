@@ -1,6 +1,7 @@
 
 //apikey = e6a41f6fdcb53d621e32978ad90ef82f
 var cityArray = JSON.parse(localStorage.getItem("cityNames")) || [];
+//if there is data in local storage, parse out the buttons
 for(let i = 0 ; i < cityArray.length ; i++){
   var city = cityArray[i].replace(" ", "+");
   var cityButton = $('<button type="button">');
@@ -9,6 +10,7 @@ for(let i = 0 ; i < cityArray.length ; i++){
   cityButton.attr("data-city", city);
   $('#cityButtons').append(cityButton);
 }
+
 $('#searchButton').on('click', function () {
 
   var cityInput = $('#cityText').val();
@@ -45,6 +47,7 @@ var fetchWeather = function (cityInput) {
       }
       console.log(data);
 
+      //Conditional to check if the city is already in local storage or not
       if (!cityArray.includes(cityInput)) {
         generateButton(cityInput, city);
       }
@@ -88,7 +91,7 @@ var generateButton = function (cityInput, city) {
   cityButton.text(cityInput);
   cityButton.addClass("btn btn-primary m-1 cityButton");
   cityButton.attr("data-city", city)
-  //ONLY DO THIS IF CITY IS ALREADY NOT IN LOCAL STORAGE
+
   cityArray.push(cityInput);
   localStorage.setItem("cityNames", JSON.stringify(cityArray));
 
@@ -132,9 +135,7 @@ var getUVI = function (latitude, longitude) {
 //GET 5 DAY FORECAST
 var get5day = function (city) {
 
-  var forecastHeader = $('<h3>').text("5 Day Forecast:")
-  $('#5day').append(forecastHeader);
-  forecastHeader.addClass("col-md-12")
+
   var forecastURL = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&units=imperial&appid=e6a41f6fdcb53d621e32978ad90ef82f'
   console.log("city: ", city);
   console.log(forecastURL)
@@ -143,10 +144,15 @@ var get5day = function (city) {
       return response.json();
     })
     .then(function (data) {
+
       console.log("forecast", data);
 
       //clear future forcast if data exists
       $('#5day').empty();
+
+      var forecastHeader = $('<h3>').text("5 Day Forecast:")
+      $('#5day').append(forecastHeader);
+      forecastHeader.addClass("col-md-12");
 
       for (let i = 2; i < data.list.length; i += 8) {
 
@@ -161,7 +167,7 @@ var get5day = function (city) {
         $('#5day').append(card);
         card.append(cardbody);
 
-        let tomorrow = moment().add((i - 1) / 8, 'days').format("M/DD/YYYY");
+        let tomorrow = moment().add((i + 6) / 8, 'days').format("M/DD/YYYY");
         cardbody.append($('<h4>').text(tomorrow));
         cardbody.append(weatherikon);
         cardbody.append($('<p>').text("Temperature: " + data.list[i].main.temp + " °F"));

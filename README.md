@@ -1,90 +1,48 @@
-# 06 Server-Side APIs: Weather Dashboard
+# Weather Dashboard
 
-## Your Task
+One paragraph of project description goes here.
 
-Third-party APIs allow developers to access their data and functionality by making requests with specific parameters to a URL. Developers are often tasked with retrieving data from another application's API and using it in the context of their own. Your challenge is to build a weather dashboard that will run in the browser and feature dynamically updated HTML and CSS.
+## Getting Started
 
-Use the [OpenWeather API](https://openweathermap.org/api) to retrieve weather data for cities. The documentation includes a section called "How to start" that provides basic setup and usage instructions. You will use `localStorage` to store any persistent data.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-## User Story
+### Prerequisites
 
-```
-AS A traveler
-I WANT to see the weather outlook for multiple cities
-SO THAT I can plan a trip accordingly
-```
-
-## Acceptance Criteria
+What things you need to install the software and how to install them.
 
 ```
-GIVEN a weather dashboard with form inputs
-WHEN I search for a city
-THEN I am presented with current and future conditions for that city and that city is added to the search history
-WHEN I view current weather conditions for that city
-THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
-WHEN I view the UV index
-THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
-WHEN I view future weather conditions for that city
-THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, and the humidity
-WHEN I click on a city in the search history
-THEN I am again presented with current and future conditions for that city
+Give examples
 ```
 
-## Mock-Up
 
-The following image shows the web application's appearance and functionality:
 
-![The weather app includes a search option, a list of cities, and a five-day forecast and current weather conditions for Atlanta.](./Assets/06-server-side-apis-homework-demo.png)
+## Built With
 
-## Grading Requirements
+* [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
+* [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
+* [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
-This homework is graded based on the following criteria: 
+## Deployed Link
 
-### Technical Acceptance Criteria: 40%
+* [See Live Site](https://dazedchou.github.io/Weather-Dashboard/)
 
-* Satisfies all of the above acceptance criteria plus the following:
 
-    * Uses the OpenWeather API to retrieve weather data.
+## Authors
 
-    * Uses `localStorage` to store persistent data.
+* **YOUR NAME** 
 
-### Deployment: 32%
+- [Link to Portfolio Site](#)
+- [Link to Github](https://github.com/)
+- [Link to LinkedIn](https://www.linkedin.com/)
 
-* Application deployed at live URL.
+See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
-* Application loads with no errors.
+## License
 
-* Application GitHub URL submitted.
+This project is licensed under the MIT License 
 
-* GitHub repository that contains application code.
+## Acknowledgments
 
-### Application Quality: 15%
-
-* Application user experience is intuitive and easy to navigate.
-
-* Application user interface style is clean and polished.
-
-* Application resembles the mock-up functionality provided in the homework instructions.
-
-### Repository Quality: 13%
-
-* Repository has a unique name.
-
-* Repository follows best practices for file structure and naming conventions.
-
-* Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
-
-* Repository contains multiple descriptive commit messages.
-
-* Repository contains quality readme file with description, screenshot, and link to deployed application.
-
-## Review
-
-You are required to submit BOTH of the following for review:
-
-* The URL of the functional, deployed application.
-
-* The URL of the GitHub repository. Give the repository a unique name and include a readme describing the project.
-
-- - -
-© 2021 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
+* Hat tip to anyone whose code, libraries, packages, or UI was used  / inspired from
+* Inspiration
+* etc
