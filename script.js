@@ -42,7 +42,7 @@ var fetchWeather = function (cityInput) {
     })
     .then(function (data) {
       if (data.message == "city not found") {
-        alert('Error: ' + data.message);
+        $('.modal').modal();
         return;
       }
       console.log(data);
@@ -77,7 +77,7 @@ var fetchWeather = function (cityInput) {
 
     })
     .catch(function (error) {
-      alert('Error: ' + error.message);
+      $('.modal').modal();
       console.log(error.message);
       return;
     })
@@ -135,7 +135,6 @@ var getUVI = function (latitude, longitude) {
 //GET 5 DAY FORECAST
 var get5day = function (city) {
 
-
   var forecastURL = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&units=imperial&appid=e6a41f6fdcb53d621e32978ad90ef82f'
   console.log("city: ", city);
   console.log(forecastURL)
@@ -144,8 +143,7 @@ var get5day = function (city) {
       return response.json();
     })
     .then(function (data) {
-
-      console.log("forecast", data);
+      console.log(data);
 
       //clear future forcast if data exists
       $('#5day').empty();
@@ -156,6 +154,7 @@ var get5day = function (city) {
 
       for (let i = 2; i < data.list.length; i += 8) {
 
+        console.log("time: ", i , data.list[i].dt_txt);
         //Date, Icon, temp, Humidity
         let weatherikon = $('<img>');
         weatherikon.attr("src", 'http://openweathermap.org/img/wn/' + data.list[i].weather[0].icon + '@2x.png')

@@ -14,7 +14,9 @@ What things you need to install the software and how to install them.
 Give examples
 ```
 
-
+### Gif Demo
+Below is a demonstration of the Weather Dashboard app in use.
+![](./WeatherDashboard.gif)
 
 ## Built With
 
@@ -31,7 +33,7 @@ Give examples
 
 * **YOUR NAME** 
 
-- [Link to Portfolio Site](#)
+- [Link to Portfolio Site](https://dazedchou.github.io/My-Portfolio/)
 - [Link to Github](https://github.com/)
 - [Link to LinkedIn](https://www.linkedin.com/)
 
