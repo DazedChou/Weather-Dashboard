@@ -1,44 +1,53 @@
 
 //apikey = e6a41f6fdcb53d621e32978ad90ef82f
-var i = 0;
+var cityArray = JSON.parse(localStorage.getItem("cityNames")) || [];
+for(let i = 0 ; i < cityArray.length ; i++){
+  var city = cityArray[i].replace(" ", "+");
+  var cityButton = $('<button type="button">');
+  cityButton.text(cityArray[i]);
+  cityButton.addClass("btn btn-primary m-1 cityButton");
+  cityButton.attr("data-city", city);
+  $('#cityButtons').append(cityButton);
+}
+$('#searchButton').on('click', function () {
 
-$('.btn').on('click', function () {
-  i++;
-  console.log("i ", i)
   var cityInput = $('#cityText').val();
-  city = cityInput.replace(" ", "+");
+  fetchWeather(cityInput);
+  $('#cityText').val("");
+})
+
+$('#clear').on('click', function () {
+  localStorage.clear();
+})
+
+$('#cityButtons').on('click', '.cityButton', function () {
+  var city = $(this).text();
+
+  console.log(city);
+  fetchWeather(city);
+})
+
+var fetchWeather = function (cityInput) {
+  var city = cityInput.replace(" ", "+");
   var requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=e6a41f6fdcb53d621e32978ad90ef82f';
-
-  console.log("city", city);
-  console.log("requestUrl: ", requestUrl);
-
-  var cities = [];
 
   //fetch weather
   fetch(requestUrl)
     .then(function (response) {
-      if (response.ok) {
-        return response.json()
-      } else {
-        alert('Error: ' + response.statusText);
-      }
+      console.log(response);
+      return response.json()
+
     })
     .then(function (data) {
-
-      var cityButton = $('<button type="button">');
-      cityButton.text(cityInput);
-      cityButton.addClass("btn btn-primary m-1");
-      cityButton.attr("data-index", i);
-      //ONLY DO THIS IF CITY IS ALREADY NOT IN LOCAL STORAGE
-      localStorage.setItem(cityButton.attr("data-index"), cityInput);
-      for (let i = 0; i < localStorage.length; i++) {
-
+      if (data.message == "city not found") {
+        alert('Error: ' + data.message);
+        return;
       }
-      $('#cityButtons').append(cityButton);
+      console.log(data);
 
-
-      //empty out textarea input
-      $('#cityText').text(" ");
+      if (!cityArray.includes(cityInput)) {
+        generateButton(cityInput, city);
+      }
 
 
       //display weather
@@ -61,10 +70,32 @@ $('.btn').on('click', function () {
 
       getUVI(lat, lon);
 
-      get5day();
+      get5day(city);
 
     })
-})
+    .catch(function (error) {
+      alert('Error: ' + error.message);
+      console.log(error.message);
+      return;
+    })
+}
+
+
+//GENERATE BUTTON
+var generateButton = function (cityInput, city) {
+  //Add button and reset textbox
+  var cityButton = $('<button type="button">');
+  cityButton.text(cityInput);
+  cityButton.addClass("btn btn-primary m-1 cityButton");
+  cityButton.attr("data-city", city)
+  //ONLY DO THIS IF CITY IS ALREADY NOT IN LOCAL STORAGE
+  cityArray.push(cityInput);
+  localStorage.setItem("cityNames", JSON.stringify(cityArray));
+
+  $('#cityButtons').append(cityButton);
+
+}
+
 
 
 //fetch UV index using the lat and long
@@ -99,12 +130,13 @@ var getUVI = function (latitude, longitude) {
 
 
 //GET 5 DAY FORECAST
-var get5day = function () {
+var get5day = function (city) {
 
   var forecastHeader = $('<h3>').text("5 Day Forecast:")
   $('#5day').append(forecastHeader);
   forecastHeader.addClass("col-md-12")
   var forecastURL = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&units=imperial&appid=e6a41f6fdcb53d621e32978ad90ef82f'
+  console.log("city: ", city);
   console.log(forecastURL)
   fetch(forecastURL)
     .then(function (response) {
