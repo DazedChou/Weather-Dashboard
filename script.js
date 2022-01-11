@@ -12,7 +12,6 @@ for(let i = 0 ; i < cityArray.length ; i++){
 }
 
 $('#searchButton').on('click', function () {
-
   var cityInput = $('#cityText').val();
   fetchWeather(cityInput);
   $('#cityText').val("");
@@ -20,6 +19,7 @@ $('#searchButton').on('click', function () {
 
 $('#clear').on('click', function () {
   localStorage.clear();
+  
 })
 
 $('#cityButtons').on('click', '.cityButton', function () {
@@ -116,17 +116,17 @@ var getUVI = function (latitude, longitude) {
       console.log("uvindex: ", uvindex);
       //check condition
       if (uvindex < 2) {
-        $('#uvi').css("background-color", "green")
-
+        $('#uvi').css("background-color", "green");
+        $('#uvi').css("text", "white");
       } else if (uvindex >= 2 && uvindex < 5) {
-        $('#uvi').css("background-color", "yellow")
-
+        $('#uvi').css("background-color", "yellow");
+        $('#uvi').css("text", "black");
       } else if (uvindex >= 5 && uvindex < 8) {
-        $('#uvi').css("background-color", "orange")
-
+        $('#uvi').css("background-color", "orange");
+        $('#uvi').css("text", "black");
       } else {
-        $('#uvi').css("background-color", "red")
-
+        $('#uvi').css("background-color", "red");
+        $('#uvi').css("text", "white");
       }
     })
 }

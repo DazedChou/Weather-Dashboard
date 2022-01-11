@@ -1,18 +1,10 @@
 # Weather Dashboard
 
-One paragraph of project description goes here.
-
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+This is a weather dashboard where a user can check the weather outlook for multiple cities. When a user searches for a city, the city name, date, icon of the weather condition, temperature, humidity and uv index are displayed, along with a 5 day forecast. When multiple cities are searched, the user is then able to go back to the search history and select the previously searched cities to have its respective current and future conditions displayed.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them.
-
-```
-Give examples
-```
+There are no prerequisites to run this website. 
 
 ### Gif Demo
 Below is a demonstration of the Weather Dashboard app in use.
@@ -31,20 +23,14 @@ Below is a demonstration of the Weather Dashboard app in use.
 
 ## Authors
 
-* **YOUR NAME** 
+* **David Chou** 
 
 - [Link to Portfolio Site](https://dazedchou.github.io/My-Portfolio/)
 - [Link to Github](https://github.com/)
 - [Link to LinkedIn](https://www.linkedin.com/)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+
 
 ## License
 
 This project is licensed under the MIT License 
-
-## Acknowledgments
-
-* Hat tip to anyone whose code, libraries, packages, or UI was used  / inspired from
-* Inspiration
-* etc
